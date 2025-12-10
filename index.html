@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ARIDE · Ingeniería y IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARIDE: Soluciones de ingeniería, automatización e inteligencia artificial para productos mecánicos y sistemas industriales.">
+  <style>
+    :root {
+      --bg-dark: #050814;
+      --bg-section: #0b1020;
+      --accent: #1e88e5;
+      --accent-soft: rgba(30, 136, 229, 0.12);
+      --text-main: #f5f7fb;
+      --text-soft: #b5bed3;
+      --border-soft: #262c40;
+      --card-bg: #101529;
+      --danger: #ff5252;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #121933 0, #050814 55%, #020308 100%);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 16px 64px;
+    }
+
+    /* NAVBAR */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(5, 8, 20, 0.88);
+      border: 1px solid rgba(57, 74, 118, 0.7);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 0, #5af3ff 0, #1e88e5 40%, #050814 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #eaf7ff;
+      box-shadow: 0 0 18px rgba(90, 243, 255, 0.7);
+    }
+
+    .logo-text-main {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(144, 164, 255, 0.5);
+      color: var(--text-main);
+      background: rgba(17, 25, 51, 0.85);
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(90, 243, 255, 0.5);
+      background: radial-gradient(circle at 0 0, rgba(90, 243, 255, 0.22), rgba(30, 136, 229, 0.85));
+      color: #f5fbff;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(90, 243, 255, 0.7);
+      transition: 0.16s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(90, 243, 255, 0.9);
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .hero {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(24, 36, 76, 0.8);
+      border: 1px solid rgba(105, 125, 210, 0.8);
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .pill-tag span.pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #5af3ff, #1e88e5);
+      box-shadow: 0 0 10px rgba(90, 243, 255, 0.85);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, #5af3ff, #6ec5ff, #ffffff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 22px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      font-size: 11px;
+      color: var(--text-soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 89, 154, 0.9);
+      background: rgba(15, 21, 49, 0.9);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(90, 243, 255, 0.6);
+      background: radial-gradient(circle at 0 0, rgba(90, 243, 255, 0.28), rgba(30, 136, 229, 0.95));
+      font-size: 13px;
+      font-weight: 500;
+      color: #fdfefe;
+      cursor: pointer;
+      box-shadow: 0 15px 30px rgba(22, 110, 195, 0.8);
+      transition: 0.18s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(22, 110, 195, 0.9);
+    }
+
+    .btn-ghost {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(118, 136, 210, 0.8);
+      background: transparent;
+      font-size: 12px;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 52, 0.9);
+      border-style: solid;
+      color: var(--text-main);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-note strong {
+      color: #e0e6ff;
+    }
+
+    /* TARJETA LADO DERECHO */
+    .hero-card {
+      border-radius: 24px;
+      background: radial-gradient(circle at 0 0, rgba(90, 243, 255, 0.06), rgba(5, 8, 20, 0.96));
+      border: 1px solid rgba(61, 78, 142, 0.95);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .hero-card-badge {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(120, 231, 255, 0.7);
+      color: #e3f9ff;
+      background: linear-gradient(120deg, rgba(120, 231, 255, 0.2), rgba(30, 136, 229, 0.6));
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 12px 0 14px;
+    }
+
+    .metric-card {
+      background: rgba(11, 16, 39, 0.95);
+      border-radius: 14px;
+      padding: 8px 9px;
+      border: 1px solid rgba(45, 64, 132, 0.95);
+      font-size: 10px;
+    }
+
+    .metric-label {
+      color: var(--text-soft);
+      margin-bottom: 2px;
+    }
+
+    .metric-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .metric-chip {
+      margin-top: 3px;
+      font-size: 10px;
+      color: #98ffcc;
+    }
+
+    .hero-card-body {
+      margin-top: 4px;
+      border-radius: 16px;
+      border: 1px solid rgba(45, 66, 128, 0.9);
+      padding: 12px 10px;
+      background: rgba(7, 10, 28, 0.95);
+    }
+
+    .hero-card-body-title {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(18, 28, 70, 0.95);
+      border: 1px solid rgba(70, 93, 163, 0.9);
+      color: var(--text-soft);
+    }
+
+    .timeline {
+      font-size: 11px;
+      color: var(--text-soft);
+      display: grid;
+      gap: 4px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .timeline-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #5af3ff, #1e88e5);
+      margin-top: 4px;
+    }
+
+    .timeline-text strong {
+      color: #e5ecff;
+    }
+
+    .hero-card-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(90, 243, 255, 0.25), transparent 70%);
+      top: -100px;
+      right: -80px;
+      filter: blur(2px);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      margin-top: 40px;
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-section);
+      padding: 20px 18px 18px;
+    }
+
+    section h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    section p.section-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      padding: 12px 11px;
+      font-size: 13px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(14, 23, 58, 0.95);
+      border: 1px solid rgba(63, 89, 165, 0.95);
+      color: var(--text-soft);
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .pill-label span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #5af3ff, #1e88e5);
+    }
+
+    ul.clean {
+      list-style: none;
+      display: grid;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    ul.clean li::before {
+      content: "• ";
+      color: #6ec5ff;
+      margin-right: 2px;
+    }
+
+    /* CONTACTO */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      font-size: 13px;
+      color: var(--text-soft);
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-highlight {
+      font-size: 13px;
+      padding: 10px 11px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      border: 1px dashed rgba(90, 243, 255, 0.7);
+      color: #e9f6ff;
+    }
+
+    .contact-card {
+      border-radius: 16px;
+      background: rgba(7, 11, 30, 0.95);
+      border: 1px solid var(--border-soft);
+      padding: 12px 11px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .contact-row {
+      display: grid;
+      gap: 4px;
+      margin-top: 3px;
+    }
+
+    .contact-row span.label {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .contact-row a {
+      font-size: 13px;
+      color: #8dd4ff;
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 22px;
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px solid rgba(36, 44, 82, 0.9);
+      padding-top: 10px;
+    }
+
+    footer a {
+      color: #8dd4ff;
+      text-decoration: underline;
+      font-size: 11px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 840px) {
+      .nav {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrapper {
+        padding: 12px 10px 40px;
+      }
+      .nav {
+        padding: 10px 12px;
+      }
+      section {
+        padding: 15px 12px 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo-mark">A</div>
+        <div>
+          <div class="logo-text-main">ARIDE</div>
+          <div class="logo-text-sub">Engineering · AI · Automation</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#proyectos">Casos de uso</a>
+        <a href="#contacto">Contacto</a>
+        <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+          Agenda una llamada
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero">
+      <div>
+        <div class="pill-tag">
+          <span class="pill-dot"></span>
+          <span>AI · Ingeniería mecánica · Arquitectura de productos</span>
+        </div>
+        <h1 class="hero-title">
+          Diseñamos <span class="highlight">productos y sistemas</span> combinando ingeniería mecánica e inteligencia artificial.
+        </h1>
+        <p class="hero-subtitle">
+          ARIDE integra modelado CAD, bibliotecas técnicas, arquitectura de productos y flujos de IA para acelerar el desarrollo de componentes mecánicos, automatizar documentación y reducir errores en diseño.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge">Modelado CAD y librerías de componentes</div>
+          <div class="badge">Automatización con IA (RAG, asistentes técnicos)</div>
+          <div class="badge">Arquitectura de sistemas y documentación YAML</div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+            Hablar sobre tu proyecto
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('proyectos').scrollIntoView({behavior: 'smooth'})">
+            Ver casos de uso
+          </button>
+        </div>
+
+        <p class="hero-note">
+          <strong>Foco actual:</strong> bibliotecas técnicas de productos, integración de IA generativa y flujos de diseño para sistemas mecánicos (ventiladores, compresores, conveyors, boilers, etc.).
+        </p>
+      </div>
+
+      <aside class="hero-card" aria-label="Resumen ARIDE">
+        <div class="hero-card-glow"></div>
+        <div class="hero-card-header">
+          <div>
+            <div class="hero-card-title">Estado del estudio ARIDE</div>
+            <div style="font-size: 11px; color: var(--text-soft);">Stack: ingeniería + IA + datos estructurados</div>
+          </div>
+          <span class="hero-card-badge">En desarrollo controlado</span>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <div class="metric-label">Componentes modelados</div>
+            <div class="metric-value">50+</div>
+            <div class="metric-chip">Brackets, fans, poleas, etc.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Casos de uso IA</div>
+            <div class="metric-value">3</div>
+            <div class="metric-chip">Chat técnico, RAG, librerías</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Foco</div>
+            <div class="metric-value">Industria</div>
+            <div class="metric-chip">Automotriz · Manufactura</div>
+          </div>
+        </div>
+
+        <div class="hero-card-body">
+          <div class="hero-card-body-title">Qué hacemos en la práctica</div>
+          <div class="chips-row">
+            <span class="chip">Bibliotecas de productos en YAML / JSON</span>
+            <span class="chip">Integración de IA con documentación técnica</span>
+            <span class="chip">Flujos de especificación y arquitectura</span>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-text">
+                <strong>01 · Producto</strong><br>
+                Definimos el comportamiento “caja negra” del sistema (función, entradas, salidas, requisitos, puertos).
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-text">
+                <strong>02 · Arquitectura</strong><br>
+                Descomponemos en elementos: housing, drivetrain, impellers, soportes, mates, cadenas funcionales.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-text">
+                <strong>03 · IA + Datos</strong><br>
+                Conectamos la biblioteca a asistentes de IA para búsqueda, generación de variantes y documentación de diseño.
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <h2>Servicios de ARIDE</h2>
+      <p class="section-subtitle">
+        Combinamos experiencia en ingeniería mecánica con flujos de IA para acelerar diseño, documentación y toma de decisiones técnicas.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="pill-label">
+            <span class="dot"></span>
+            <span>Diseño y modelado CAD</span>
+          </div>
+          <h3>Modelado de componentes y ensambles</h3>
+          <p>
+            Desarrollo de piezas, brackets y subconjuntos mecánicos listos para producción o validación conceptual.
+          </p>
+          <ul class="clean">
+            <li>Modelos 3D de partes y ensambles</li>
+            <li>Soportes, ventiladores, estructuras, bases</li>
+            <li>Preparación para librerías de productos</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="pill-label">
+            <span class="dot"></span>
+            <span>IA aplicada a ingeniería</span>
+          </div>
+          <h3>Asistentes técnicos y RAG</h3>
+          <p>
+            Diseño de flujos donde la IA consulta bibliotecas, especificaciones y documentos técnicos para responder de forma controlada.
+          </p>
+          <ul class="clean">
+            <li>Chats privados entrenados con documentos</li>
+            <li>Consultas guiadas sobre piezas y sistemas</li>
+            <li>Prototipos de generación de variantes</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="pill-label">
+            <span class="dot"></span>
+            <span>Arquitectura de productos</span>
+          </div>
+          <h3>Bibliotecas y estructuras YAML/JSON</h3>
+          <p>
+            Definición formal de productos: funciones, puertos, mates, cadenas funcionales, ecuaciones de balance y vistas de arquitectura.
+          </p>
+          <ul class="clean">
+            <li>Esquemas reutilizables para nuevos productos</li>
+            <li>Plantillas para compresores, conveyors, boilers</li>
+            <li>Integración con herramientas de IA y CAD</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOLUCIONES -->
+    <section id="soluciones">
+      <h2>Soluciones que estamos construyendo</h2>
+      <p class="section-subtitle">
+        El objetivo de ARIDE es evolucionar hacia una biblioteca de productos inteligente, capaz de sugerir configuraciones, detectar errores y documentar cambios de ingeniería.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Biblioteca técnica de productos</h3>
+          <p>
+            Estructuramos componentes y sistemas (como el axial fan) con vistas “caja negra” y “arquitectura” que luego pueden ser explotadas por IA.
+          </p>
+          <ul class="clean">
+            <li>Definición de funciones, puertos y requisitos</li>
+            <li>Relación entre ítems, mates y cadenas funcionales</li>
+            <li>Formato estándar: YAML / JSON</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Asistentes técnicos privados</h3>
+          <p>
+            Chats internos que entienden especificaciones, índices de búsqueda o documentación de proyectos y responden con foco técnico.
+          </p>
+          <ul class="clean">
+            <li>Conexión a índices / bases de datos</li>
+            <li>Respuestas soportadas por fuente documental</li>
+            <li>Uso controlado de modelos de lenguaje</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Flujos de diseño y verificación</h3>
+          <p>
+            Soporte para procesos de desarrollo: desde la idea del producto hasta su liberación, pasando por revisión de requisitos y variantes.
+          </p>
+          <ul class="clean">
+            <li>Checklists guiadas con IA</li>
+            <li>Resúmenes automáticos de cambios</li>
+            <li>Soporte a documentación de ingeniería</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROYECTOS / CASOS -->
+    <section id="proyectos">
+      <h2>Casos de uso y enfoque actual</h2>
+      <p class="section-subtitle">
+        ARIDE está orientado a entornos donde conviven diseño mecánico, documentación técnica extensa y necesidad de automatizar conocimiento.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Ventiladores axiales y subsistemas</h3>
+          <p>
+            Ejemplo de producto modelado con vistas “black box” y “architecture view”, incluyendo funciones, puertos, mates y cadenas funcionales.
+          </p>
+          <ul class="clean">
+            <li>Modelo funcional y geométrico del fan</li>
+            <li>Definición de interfaces y requerimientos</li>
+            <li>Base para generar variantes futuras</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Conveyors y manejo de materiales</h3>
+          <p>
+            Objetivo a mediano plazo: estructurar una biblioteca para sistemas de transporte, siguiendo el mismo enfoque arquitectónico.
+          </p>
+          <ul class="clean">
+            <li>Identificación de módulos estándar</li>
+            <li>Plantillas de puertos mecánicos y de potencia</li>
+            <li>Documentación lista para IA</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Boilers y sistemas térmicos</h3>
+          <p>
+            Exploración de cómo representar calderas y sistemas asociados usando el mismo lenguaje: funciones, puertos, balances y arquitectura.
+          </p>
+          <ul class="clean">
+            <li>Requisitos térmicos y de seguridad</li>
+            <li>Balance de energía, masas y estados</li>
+            <li>Soporte para selección y comparación</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p class="section-subtitle">
+        Si quieres explorar ideas, revisar un proyecto de ingeniería o prototipar un flujo de IA aplicado a productos mecánicos, podemos hablar.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-highlight">
+            En ARIDE el enfoque está en construir capacidades: bibliotecas técnicas, flujos de IA y métodos que puedan escalar a un entorno real de ingeniería.
+          </div>
+          <p>
+            Hoy el estudio se encuentra en fase de experimentación y consolidación de metodología, lo que permite trabajar en:
+          </p>
+          <ul class="clean">
+            <li>Prototipos de asistentes internos para ingeniería</li>
+            <li>Estructuras de datos técnicas para productos</li>
+            <li>Casos de estudio con datos ficticios o ejemplos controlados</li>
+          </ul>
+          <p>
+            Si estás evaluando cómo llevar IA y automatización a tus procesos de diseño mecánico o documentación, una conversación inicial puede ayudarte a aterrizar el alcance y las opciones tecnológicas.
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <div style="font-size: 13px; margin-bottom: 4px; color: #e5ecff;">Datos de contacto</div>
+          <div class="contact-row">
+            <span class="label">Correo electrónico</span>
+            <a href="mailto:contacto@aride.com.mx">contacto@aride.com.mx</a>
+          </div>
+          <div class="contact-row" style="margin-top: 8px;">
+            <span class="label">Mensaje corto sugerido</span>
+            <p>
+              “Hola, me interesa platicar sobre cómo aplicar IA e ingeniería en el desarrollo de productos / sistemas mecánicos. Me gustaría agendar una llamada corta para explorar opciones.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© <span id="year"></span> ARIDE · Ingeniería & IA aplicada.</span>
+      <span>Sitio en construcción evolutiva. Esta página refleja el estado actual del proyecto ARIDE.</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
