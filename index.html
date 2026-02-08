@@ -1,237 +1,332 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ARIDE | Sheet Metal & Mechanical Engineering</title>
-  <meta name="description" content="ARIDE delivers supplier-ready sheet metal and mechanical engineering: enclosures, cabinets, sinks, worktables, 2D drawings, DXF flat patterns, reverse engineering, and 3D design." />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="ARIDE: diseño y documentación para fabricación. Sheet metal enclosures, cabinets, sinks, worktables, DXF flat patterns, 2D drawings, reverse engineering, 3D printing y más." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ARIDE | Sheet Metal & Mechanical Engineering" />
+  <meta property="og:description" content="Sheet metal + ingeniería mecánica. Entregables listos para cotizar y fabricar." />
+  <!-- Si luego subes una imagen: assets/og.png -->
+  <!-- <meta property="og:image" content="assets/og.png" /> -->
+
+  <meta name="theme-color" content="#0B1220" />
 
   <style>
+    /* =========================
+       ARIDE Minimal System
+       ========================= */
     :root{
-      --bg:#0b1220;
-      --panel:#0f1a2e;
-      --panel2:#0c1628;
-      --text:#e8eefc;
-      --muted:#a9b7d6;
-      --line:rgba(255,255,255,.10);
-      --accent:#6ae4ff;
-      --accent2:#8b5cf6;
-      --good:#22c55e;
-      --warn:#f59e0b;
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --bg: #0B1220;
+      --bg2:#070B14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.04);
+      --text: #EAF0FF;
+      --muted:#A7B4D6;
+      --muted2:#7F8CB0;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+
+      /* Accent: elige 1 (Hostinger-ish = indigo) */
+      --accent:#6366F1;   /* indigo */
+      --accent2:#38BDF8;  /* cyan técnico */
+
       --radius: 18px;
+      --radius2: 14px;
+      --max: 1140px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
+    /* Light theme */
+    html[data-theme="light"]{
+      --bg: #F8FAFC;
+      --bg2:#FFFFFF;
+      --panel: rgba(15,23,42,.06);
+      --panel2: rgba(15,23,42,.04);
+      --text: #0F172A;
+      --muted:#475569;
+      --muted2:#64748B;
+      --line: rgba(15,23,42,.12);
+      --shadow: 0 18px 50px rgba(2,6,23,.12);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 700px at 10% 10%, rgba(106,228,255,.10), transparent 55%),
-                  radial-gradient(1000px 600px at 90% 20%, rgba(139,92,246,.12), transparent 55%),
-                  linear-gradient(180deg, var(--bg), #070b14 70%);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 700px at 15% 10%, color-mix(in srgb, var(--accent2) 18%, transparent), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2) 70%);
       color:var(--text);
       line-height:1.45;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1140px; margin:0 auto; padding:0 20px;}
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 0 20px; }
+
+    /* Topbar */
     .topbar{
-      position:sticky; top:0; z-index:50;
+      position: sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.75);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
       border-bottom: 1px solid var(--line);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+      padding: 14px 0;
+      gap: 12px;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width:220px;
-    }
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(106,228,255,.95), rgba(139,92,246,.9));
-      box-shadow: 0 10px 30px rgba(106,228,255,.16);
+
+    /* Brand */
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .mark{
+      width: 34px; height: 34px; border-radius: 12px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--accent) 45%, transparent),
+          color-mix(in srgb, var(--accent2) 35%, transparent)
+        );
+      box-shadow: 0 16px 40px color-mix(in srgb, var(--accent) 20%, transparent);
       position:relative;
+      overflow:hidden;
     }
-    .logo:after{
+    .mark:after{
       content:"";
-      position:absolute; inset:10px;
+      position:absolute;
+      inset:10px 8px;
       border-radius:10px;
-      border:2px solid rgba(11,18,32,.75);
+      border:1px solid color-mix(in srgb, var(--text) 14%, transparent);
       transform: rotate(12deg);
     }
-    .brand h1{font-size:14px; margin:0; letter-spacing:.14em}
-    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
-    .links{
-      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
-      justify-content:flex-end;
+    .wordmark .name{
+      font-weight: 850;
+      letter-spacing: .18em;
+      font-size: 13px;
     }
+    .wordmark .tag{
+      margin-top:2px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Links */
+    .links{ display:flex; align-items:center; gap: 10px; flex-wrap:wrap; justify-content:flex-end; }
     .links a{
-      font-size:13px; color:var(--muted);
-      padding:8px 10px; border-radius:12px;
-      transition: all .2s ease;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      transition: all .18s ease;
     }
-    .links a:hover{color:var(--text); background: rgba(255,255,255,.06)}
+    .links a:hover{ color: var(--text); background: var(--panel); }
+
+    /* Buttons */
     .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--accent) 22%, transparent),
+          color-mix(in srgb, var(--accent2) 18%, transparent)
+        );
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: 0 18px 40px color-mix(in srgb, #000 20%, transparent);
+      transition: transform .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+
+    .iconbtn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid rgba(106,228,255,.35);
-      background: linear-gradient(135deg, rgba(106,228,255,.18), rgba(139,92,246,.12));
-      color:var(--text);
-      font-weight:600;
-      box-shadow: 0 16px 40px rgba(0,0,0,.22);
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      cursor: pointer;
+      transition: all .18s ease;
     }
-    .btn:hover{transform: translateY(-1px)}
-    .hero{
-      padding:56px 0 28px;
-    }
-    .hero-grid{
+    .iconbtn:hover{ border-color: color-mix(in srgb, var(--accent2) 35%, var(--line)); transform: translateY(-1px); }
+    .iconbtn svg{ width:18px; height:18px; }
+
+    /* Layout sections */
+    .hero{ padding: 56px 0 18px; }
+    .heroGrid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap:18px;
-      align-items:stretch;
+      gap: 16px;
+      align-items: stretch;
     }
     .card{
-      background: linear-gradient(180deg, rgba(15,26,46,.92), rgba(12,22,40,.92));
-      border:1px solid var(--line);
       border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
       box-shadow: var(--shadow);
     }
-    .hero-main{padding:28px;}
+    .heroMain{ padding: 28px; }
     .kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(106,228,255,.28);
-      background: rgba(106,228,255,.08);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .dot{
-      width:7px; height:7px; border-radius:50%;
-      background: var(--good);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
-    }
-    h2{
-      margin:14px 0 8px;
-      font-size:38px;
-      line-height:1.05;
-      letter-spacing:-.02em;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-      max-width: 62ch;
-    }
-    .hero-cta{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:18px;
-      align-items:center;
-    }
-    .pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 12px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 7px 12px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.05);
+      border: 1px solid color-mix(in srgb, var(--accent2) 30%, var(--line));
+      background: color-mix(in srgb, var(--accent2) 10%, transparent);
       color: var(--muted);
       font-size: 12px;
     }
-    .hero-side{padding:22px;}
+    .dot{
+      width: 7px; height:7px; border-radius: 50%;
+      background: #22C55E;
+      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 64ch;
+    }
+    .ctaRow{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top: 18px; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .heroSide{ padding: 22px; }
     .metric{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      margin-bottom:12px;
+      padding: 14px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      margin-bottom: 12px;
     }
-    .metric b{display:block; font-size:13px}
-    .metric span{display:block; color:var(--muted); font-size:12px; margin-top:4px}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      padding: 18px 0 42px;
-    }
-    .tile{
-      padding:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      transition: transform .18s ease, border-color .18s ease;
-    }
-    .tile:hover{transform: translateY(-2px); border-color: rgba(106,228,255,.34)}
-    .tile h3{margin:0 0 8px; font-size:16px}
-    .tile p{margin:0; color:var(--muted); font-size:13px}
-    .section{
-      padding: 16px 0 10px;
-    }
-    .section h4{
+    .metric b{ display:block; font-size: 13px; }
+    .metric span{ display:block; margin-top:4px; font-size: 12px; color: var(--muted); }
+
+    .section{ padding: 22px 0 10px; }
+    .section h2{
       margin:0 0 10px;
       font-size: 18px;
       letter-spacing: -.01em;
     }
-    .two{
+    .hr{ height:1px; background: var(--line); margin: 14px 0; }
+
+    /* Services grid */
+    .grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
-    .list{
-      margin:0; padding-left: 18px; color:var(--muted); font-size:13px;
+    .tile{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      transition: transform .16s ease, border-color .16s ease;
     }
-    .list li{margin:8px 0}
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius: 999px;
-      background: rgba(139,92,246,.12);
-      border: 1px solid rgba(139,92,246,.25);
-      color: var(--muted);
-      font-size: 12px;
-      margin: 8px 8px 0 0;
+    .tile:hover{
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--accent2) 35%, var(--line));
     }
-    .footer{
-      padding: 30px 0 44px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 12px;
+    .tileHead{
+      display:flex; gap:12px; align-items:flex-start;
     }
-    .contact{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px;
-    }
-    .smallbtn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 12px;
+    .thumb{
+      width: 44px; height: 44px;
       border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-weight:600;
-      font-size: 13px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(18px 18px at 30% 30%, color-mix(in srgb, var(--accent2) 18%, transparent), transparent 55%),
+        radial-gradient(20px 20px at 70% 70%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+        linear-gradient(180deg, var(--panel), var(--panel2));
+      flex: 0 0 auto;
     }
-    .smallbtn:hover{border-color: rgba(106,228,255,.34)}
-    .muted{color:var(--muted)}
-    .hr{
-      height:1px; background: var(--line); margin: 14px 0;
+    .tile h3{ margin:0; font-size: 15px; }
+    .tile p{ margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+
+    .small{
+      margin-top: 10px;
+      color: var(--muted2);
+      font-size: 12px;
     }
 
+    /* Two column blocks */
+    .two{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    ul{ margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+    li{ margin: 8px 0; }
+
+    /* Portfolio placeholders */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .shot{
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      overflow:hidden;
+      min-height: 170px;
+      position:relative;
+    }
+    .shot .ph{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg,
+          transparent,
+          color-mix(in srgb, var(--text) 6%, transparent),
+          transparent
+        );
+      transform: translateX(-40%);
+      animation: shimmer 2.2s infinite;
+      opacity:.55;
+    }
+    @keyframes shimmer{
+      0% { transform: translateX(-40%); }
+      100% { transform: translateX(140%); }
+    }
+    .shot .label{
+      position:absolute;
+      left:12px; bottom:12px; right:12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Footer */
+    footer{
+      padding: 28px 0 42px;
+      border-top: 1px solid var(--line);
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Responsive */
     @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr; }
-      h2{font-size:34px}
-      .grid{grid-template-columns:1fr}
-      .two{grid-template-columns:1fr}
-      .brand{min-width:auto}
+      .heroGrid{ grid-template-columns: 1fr; }
+      h1{ font-size: 34px; }
+      .grid{ grid-template-columns: 1fr; }
+      .two{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: 1fr; }
+      .links{ gap: 6px; }
     }
   </style>
 </head>
@@ -240,209 +335,306 @@
   <header class="topbar">
     <div class="wrap">
       <div class="nav">
-        <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div>
-            <h1>ARIDE</h1>
-            <p>Sheet Metal • Mechanical Engineering</p>
+        <a class="brand" href="#top" aria-label="ARIDE Home">
+          <div class="mark" aria-hidden="true"></div>
+          <div class="wordmark">
+            <div class="name">ARIDE</div>
+            <div class="tag">Sheet Metal • Mechanical Engineering</div>
           </div>
-        </div>
+        </a>
 
-        <nav class="links" aria-label="Primary">
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#about">About</a>
-          <a class="btn" href="#contact">Get a Quote</a>
+        <nav class="links" aria-label="Primary navigation">
+          <a href="#services">Servicios</a>
+          <a href="#process">Proceso</a>
+          <a href="#portfolio">Portafolio</a>
+          <a href="#about">Nosotros</a>
+          <a href="#contact" class="btn">Cotizar</a>
+
+          <button class="iconbtn" id="themeBtn" aria-label="Cambiar tema (dark/light)" title="Tema">
+            <!-- Sun/Moon icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/>
+            </svg>
+          </button>
         </nav>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="top">
+    <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <div class="hero-grid">
-          <div class="card hero-main">
-            <span class="kicker"><span class="dot"></span> Supplier-ready CAD + fabrication drawings (fast, clean, practical)</span>
-            <h2>Sheet metal design that actually builds.</h2>
+        <div class="heroGrid">
+          <div class="card heroMain">
+            <span class="kicker"><span class="dot"></span> Entregables listos para cotizar, fabricar y liberar</span>
+
+            <h1>Ingeniería y Sheet Metal que sí se construye.</h1>
+
             <p class="sub">
-              ARIDE delivers mechanically credible designs and documentation for fabrication:
-              DXF flat patterns, bend notes, GD&amp;T where needed, BOMs, and clean assemblies—ready for quoting, cutting, bending, and inspection.
+              ARIDE diseña y documenta productos de lámina y mecánicos con enfoque real de fabricación:
+              <b>DXF flat patterns</b>, <b>2D drawings</b>, ensambles limpios, BOMs y detalles listos para taller.
+              También hacemos <b>reverse engineering</b>, soporte para <b>3D printing</b>, piezas maquinadas y conceptos para <b>casting</b>.
             </p>
 
-            <div class="hero-cta">
-              <a class="btn" href="#contact">Request Quote</a>
-              <a class="smallbtn" href="#services">See Services</a>
-              <span class="pill">Enclosures • Cabinets • Sinks • Worktables • Racks</span>
-              <span class="pill">3D Modeling • 2D Drawings • Reverse Engineering</span>
+            <div class="ctaRow">
+              <a class="btn" href="#contact">Pedir cotización</a>
+              <a class="pill" href="#services">Enclosures • Cabinets • Sinks • Worktables</a>
+              <span class="pill">3D CAD • 2D Drawings • DXF • STEP</span>
             </div>
 
             <div class="hr"></div>
 
-            <div class="section">
-              <h4>What you get</h4>
-              <div class="two">
-                <ul class="list">
-                  <li>Parametric models (clean feature tree) + manufacturing intent.</li>
-                  <li>Shop-ready drawings (dimensions, tolerances, notes, callouts).</li>
-                  <li>DXF flat patterns + bend radii/allowances guidance.</li>
+            <div class="two">
+              <div class="tile">
+                <h3>Lo que entregamos</h3>
+                <ul>
+                  <li>Modelos paramétricos (feature tree limpio) + intención de manufactura.</li>
+                  <li>Planos 2D con tolerancias, notas, callouts y control de revisiones.</li>
+                  <li>DXF flat patterns + guía de radios/BA/K-factor (según tu estándar).</li>
                 </ul>
-                <ul class="list">
-                  <li>Assembly logic, fasteners, stack-ups, and fit checks.</li>
-                  <li>Revision control + clear deliverable package.</li>
-                  <li>Communication like an engineer (not “just pretty CAD”).</li>
+              </div>
+              <div class="tile">
+                <h3>Para qué te sirve</h3>
+                <ul>
+                  <li>Menos back-and-forth con proveedores y cotizaciones más rápidas.</li>
+                  <li>Menos retrabajo: diseño pensado para doblado, ensamble e inspección.</li>
+                  <li>Documentación “release-ready” (no solo renders bonitos).</li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <aside class="card hero-side">
+          <aside class="card heroSide">
             <div class="metric">
-              <b>Sheet Metal Focus</b>
-              <span>Enclosures, cabinets, trays, panels, guards, sinks, worktables, brackets.</span>
+              <b>Sheet Metal (Core)</b>
+              <span>Enclosures, cabinets, panels, racks, guards, sinks, worktables, brackets, trays.</span>
             </div>
             <div class="metric">
               <b>Mechanical Engineering</b>
-              <span>3D design, DFM, detailing, assemblies, GD&amp;T, prototype support.</span>
+              <span>3D design, detailing, DFM, ensambles, fasteners, stack-ups básicos, GD&T (cuando aplica).</span>
             </div>
             <div class="metric">
-              <b>Extra Capabilities</b>
-              <span>Reverse engineering, 3D printing, casting concepts, machined parts.</span>
-            </div>
-
-            <div class="section">
-              <h4>Tooling</h4>
-              <span class="badge">SolidWorks</span>
-              <span class="badge">Inventor</span>
-              <span class="badge">Fusion 360</span>
-              <span class="badge">AutoCAD</span>
-              <span class="badge">STEP / DXF / DWG</span>
+              <b>Extras</b>
+              <span>Reverse engineering, 3D printing/prototipos, piezas maquinadas, conceptos para casting.</span>
             </div>
 
             <div class="hr"></div>
 
-            <p class="muted" style="margin:0;">
-              Want a “pro” look? Add 3–6 portfolio images (renders or drawing snippets) and this page becomes killer.
-            </p>
+            <div class="small">
+              <b>Tip pro:</b> con 3–6 imágenes reales (renders o screenshots de drawings) la página se vuelve “cliente-ready”.
+              No necesitas llenar de imágenes; solo las correctas.
+            </div>
           </aside>
         </div>
 
-        <div id="services" class="section" style="padding-top:26px;">
-          <h4>Services</h4>
+        <!-- SERVICES -->
+        <section class="section" id="services">
+          <h2>Servicios</h2>
           <div class="grid">
             <div class="tile">
-              <h3>Sheet Metal Design</h3>
-              <p>Enclosures, cabinets, server trays, guards, brackets, racks, sinks, worktables. Practical bend strategy and fabrication intent.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>Sheet Metal Design</h3>
+                  <p>Diseño de lámina para fabricación real: doblado, ensamble, accesos, hardware y tolerancias prácticas.</p>
+                  <div class="small">Enclosures • Cabinets • Trays • Guards • Panels • Worktables • Sinks</div>
+                </div>
+              </div>
             </div>
+
             <div class="tile">
-              <h3>2D Drawings &amp; Release Packs</h3>
-              <p>Supplier-ready drawings: dimensions, tolerances, notes, hole tables, bend notes, BOMs, revision-ready packages.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>2D Drawings & Release Pack</h3>
+                  <p>Planos 2D limpios: dimensionado, tolerancias, notas, hole tables, BOM, revisiones.</p>
+                  <div class="small">Deliverable pensado para proveedor / taller / inspección</div>
+                </div>
+              </div>
             </div>
+
             <div class="tile">
-              <h3>DXF Flat Patterns</h3>
-              <p>Clean DXF outputs, correct orientation, bend lines if needed, and guidance for K-factor / bend allowance setup.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>DXF Flat Patterns</h3>
+                  <p>DXF listos para corte (láser/waterjet/punch) y guía para BA/K-factor según estándar del cliente.</p>
+                  <div class="small">Flat pattern • bend notes • bend lines (si aplica)</div>
+                </div>
+              </div>
             </div>
+
             <div class="tile">
-              <h3>Reverse Engineering</h3>
-              <p>From sketches, photos, or measurements to parametric CAD. Scan-to-CAD supported if you provide point cloud/mesh.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>Reverse Engineering</h3>
+                  <p>De sketches, fotos o mediciones a CAD paramétrico. Scan-to-CAD si traes mesh/point cloud.</p>
+                  <div class="small">Rebuild • cleanup • manufacturable model</div>
+                </div>
+              </div>
             </div>
+
             <div class="tile">
-              <h3>3D Modeling &amp; Assemblies</h3>
-              <p>Mechanically credible concepts, fit checks, mounting strategies, fasteners, and assembly documentation.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>3D CAD & Assemblies</h3>
+                  <p>Modelado 3D, ensambles, interferencias, estrategia de montaje, fasteners y documentación.</p>
+                  <div class="small">STEP • IGES • Solid models + drawings</div>
+                </div>
+              </div>
             </div>
+
             <div class="tile">
-              <h3>Prototyping &amp; Other</h3>
-              <p>3D printing support, casting concepts, machined components, fixtures, and iterative engineering changes.</p>
+              <div class="tileHead">
+                <div class="thumb" aria-hidden="true"></div>
+                <div>
+                  <h3>Prototyping & Other</h3>
+                  <p>Soporte para 3D printing, piezas maquinadas, fixtures simples y conceptos para casting.</p>
+                  <div class="small">Iteraciones rápidas con criterio de ingeniería</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div id="process" class="section">
-          <h4>Process</h4>
+          <div class="small" style="margin-top:12px;">
+            <b>Pasito para meter imágenes:</b> luego cambiamos el “thumb” por un <code>&lt;img&gt;</code> real (uno por servicio), sin romper el layout.
+          </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="section" id="process">
+          <h2>Proceso</h2>
           <div class="two">
             <div class="tile">
-              <h3>1) Define</h3>
-              <p class="muted">Requirements, constraints, materials, manufacturing method, and acceptance criteria.</p>
-              <ul class="list">
-                <li>Inputs: sketch, reference parts, dimensions, or target envelope.</li>
-                <li>Outputs: clear scope + deliverables list.</li>
+              <h3>1) Definir</h3>
+              <p class="sub" style="font-size:13px;">
+                Alcance, restricciones, material/espesor, método de fabricación, y criterios de aceptación.
+              </p>
+              <div class="hr"></div>
+              <ul>
+                <li>Inputs: sketch, referencia, dimensiones, envelope, fotos, estándares.</li>
+                <li>Output: lista de entregables y fechas (sin sorpresas).</li>
               </ul>
             </div>
+
             <div class="tile">
-              <h3>2) Design → Detail → Deliver</h3>
-              <p class="muted">Model, iterate, then produce a fabrication-ready package.</p>
-              <ul class="list">
-                <li>3D CAD + assembly checks.</li>
-                <li>2D drawings + DXF flat patterns + BOM (as needed).</li>
+              <h3>2) Diseñar → Detallar → Entregar</h3>
+              <p class="sub" style="font-size:13px;">
+                Modelamos con intención de manufactura y cerramos con un paquete de liberación.
+              </p>
+              <div class="hr"></div>
+              <ul>
+                <li>3D CAD + checks (fit/interferencias/ensamble).</li>
+                <li>2D drawings + DXF + BOM + revisiones (según el proyecto).</li>
               </ul>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div id="portfolio" class="section">
-          <h4>Portfolio</h4>
-          <div class="tile">
-            <p class="muted" style="margin:0;">
-              Placeholder section. Add images inside a folder like <b>/assets</b> and reference them here.
-              Example: <span style="color:var(--text)">/assets/enclosure-01.png</span>
-            </p>
-            <div class="hr"></div>
-            <ul class="list">
-              <li>Sheet metal enclosure with removable panels + PEM hardware</li>
-              <li>Stainless sink assembly with weld notes + mounting bracketry</li>
-              <li>Worktable frame: tubing + sheet shelves + CNC-ready drawings</li>
-            </ul>
-          </div>
-        </div>
+        <!-- PORTFOLIO -->
+        <section class="section" id="portfolio">
+          <h2>Portafolio (placeholder)</h2>
+          <p class="sub">
+            Aquí metemos 3–6 ejemplos reales (renders o screenshots de drawings). No necesitas un chingo; solo piezas “wow”.
+          </p>
 
-        <div id="about" class="section">
-          <h4>About ARIDE</h4>
-          <div class="tile">
-            <p class="muted" style="margin:0;">
-              ARIDE is a digital mechanical engineering studio focused on sheet metal and build-ready design.
-              We support projects from concept to detailed drawings, validation support, and release documentation.
-              <br><br>
-              <b style="color:var(--text)">Replace this paragraph with your real intro</b> (you can mention your 8+ years, industries, and what makes your workflow reliable).
-            </p>
-          </div>
-        </div>
-
-        <div id="contact" class="section" style="padding-bottom:34px;">
-          <h4>Contact</h4>
-          <div class="tile">
-            <p class="muted" style="margin:0;">
-              Tell us what you need (photos/sketches/dimensions), target material/thickness, and deadline.
-              We’ll reply with a scope + estimate.
-            </p>
-            <div class="contact">
-              <!-- Replace with your real email / links -->
-              <a class="smallbtn" href="mailto:YOUR_EMAIL_HERE">Email: YOUR_EMAIL_HERE</a>
-              <a class="smallbtn" href="#" onclick="alert('Replace this with your Upwork/profile link'); return false;">Upwork Profile</a>
-              <a class="smallbtn" href="#" onclick="alert('Replace this with your WhatsApp link'); return false;">WhatsApp</a>
+          <div class="gallery" style="margin-top:14px;">
+            <div class="shot">
+              <div class="ph" aria-hidden="true"></div>
+              <div class="label">Enclosure / Cabinet (foto o render)</div>
             </div>
-            <div class="hr"></div>
-            <p class="muted" style="margin:0;">
-              Tip: sube 3–6 imágenes (renders o screenshots de drawings) y esta landing se convierte en “cliente-ready” de inmediato.
+            <div class="shot">
+              <div class="ph" aria-hidden="true"></div>
+              <div class="label">Sink / Worktable (drawing screenshot)</div>
+            </div>
+            <div class="shot">
+              <div class="ph" aria-hidden="true"></div>
+              <div class="label">DXF + 2D Drawing (flat pattern)</div>
+            </div>
+          </div>
+
+          <div class="small" style="margin-top:12px;">
+            Cuando tengas imágenes: crea <b>assets/</b> y reemplazamos estos placeholders por <code>&lt;img src="assets/tuimagen.png"&gt;</code>.
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+          <h2>Nosotros</h2>
+          <div class="tile">
+            <p class="sub" style="margin:0;">
+              <b>ARIDE</b> es un estudio digital de ingeniería mecánica enfocado en <b>sheet metal</b> y documentación para fabricación.
+              Trabajamos desde concepto hasta detalle (y si hace falta, validación/iteraciones).
+              <br><br>
+              <span style="color:var(--muted);">
+                (Aquí mete tu texto real: “ingenieros con +8 años… automotriz/manufactura… enfoque en reducir retrabajo y acelerar cotización”).
+              </span>
             </p>
           </div>
-        </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section" id="contact" style="padding-bottom: 22px;">
+          <h2>Contacto</h2>
+          <div class="tile">
+            <p class="sub" style="margin:0;">
+              Mándanos tu idea con fotos/sketches/dimensiones y te respondemos con alcance + estimación.
+            </p>
+
+            <div class="hr"></div>
+
+            <div class="ctaRow">
+              <!-- Cambia estos links -->
+              <a class="btn" href="mailto:TU_CORREO@DOMINIO.COM">Email</a>
+              <a class="pill" href="#" onclick="alert('Pon aquí tu link de Upwork'); return false;">Upwork</a>
+              <a class="pill" href="#" onclick="alert('Pon aquí tu link de WhatsApp (wa.me)'); return false;">WhatsApp</a>
+            </div>
+
+            <div class="small" style="margin-top:12px;">
+              Recomendado: agrega <b>1</b> email real y <b>1</b> link (Upwork o WhatsApp) para no saturar.
+            </div>
+          </div>
+        </section>
 
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <span>© <span id="y"></span> ARIDE. All rights reserved.</span>
-        <span class="muted">Sheet Metal • Enclosures • Cabinets • Sinks • Worktables • Reverse Engineering</span>
-      </div>
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <span>© <span id="y"></span> ARIDE. All rights reserved.</span>
+      <span>Sheet Metal • Enclosures • Cabinets • Sinks • Worktables • Reverse Engineering</span>
     </div>
   </footer>
 
   <script>
+    // Year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Theme toggle (persist)
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const saved = localStorage.getItem("aride_theme");
+
+    if (saved === "light" || saved === "dark") {
+      root.setAttribute("data-theme", saved);
+    } else {
+      // Default: dark. Si quieres auto por sistema: descomenta lo de abajo y comenta el default.
+      // const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      // root.setAttribute("data-theme", prefersLight ? "light" : "dark");
+      root.setAttribute("data-theme", "dark");
+    }
+
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("aride_theme", next);
+    });
   </script>
 </body>
 </html>
